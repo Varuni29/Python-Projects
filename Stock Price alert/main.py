@@ -12,7 +12,6 @@ my_password="wbunlkjnzmmhltbt"
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
 
-    ## STEP 1: Use https://www.alphavantage.co/documentation/#daily
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
 response=requests.get(url=f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={STOCK_NAME}&outputsize=full&apikey={api_key}")
@@ -35,9 +34,7 @@ difference = round(abs(float(closing_value_yesterday)-float(closing_value_previo
 percentage_difference = round((difference/float(closing_value_yesterday))*100,2)
 
 if percentage_difference < 5:
-
-    ## STEP 2: https://newsapi.org/ 
-    # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+    # Instead of printing ("Get News"), getting the first 3 news pieces for the COMPANY_NAME.
 
 
     news_response=requests.get(url=f"https://newsapi.org/v2/everything?q={COMPANY_NAME}&from=2023-02-17&sortBy=publishedAt&apiKey={news_api_key}")
@@ -46,8 +43,7 @@ if percentage_difference < 5:
 
 
     top_news_articles=news_articles[:3]
-    ## STEP 3: Use twilio.com/docs/sms/quickstart/python
-    #to send a separate message with each article's title and description to your phone number. 
+    #to send a separate message with each article's title and description to your email. 
 
     formatted_article=[f"Headlines: {article['title']}.\n\nBrief: {article['description']}" for article in top_news_articles]
 
